@@ -13,7 +13,7 @@ def main():
     parser = argparse.ArgumentParser(description="CentrAlign Autonomous Company Operator")
     parser.add_argument("--web", action="store_true", default=True, help="Launch Mission Control Web Dashboard (Default)")
     parser.add_argument("--cli", action="store_true", help="Run interactive CLI interface")
-    parser.add_argument("--goal", type="str", help="Goal to execute in CLI mode")
+    parser.add_argument("--goal", type=str, help="Goal to execute in CLI mode")
     parser.add_argument("--auto-approve", action="store_true", help="Auto-approve HITL gates in CLI mode")
     parser.add_argument("--port", type=int, default=CONFIG.port, help="Port to bind web server")
     args = parser.parse_args()
