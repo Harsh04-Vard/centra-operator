@@ -1,0 +1,74 @@
+{
+  "session_id": "sess-553bf62e",
+  "goal": "Onboard Alex Morgan as Senior Frontend Engineer starting Monday",
+  "disambiguated_intent": "Execute end-to-end employee onboarding for Alex Morgan (Senior Frontend Engineer) including contract verification, BambooHR registration, GitHub/Okta provisioning, compliance checklist generation, and welcome email dispatch.",
+  "matched_sop": "SOP-HR-001",
+  "execution_status": "COMPLETED",
+  "total_tasks": 5,
+  "completed_tasks_count": 5,
+  "failed_tasks_count": 0,
+  "created_at": 1791609241.5788293,
+  "completed_at": 1791609241.5855286,
+  "tasks_evidence": [
+    {
+      "task_id": "task-1-step-1-parse-contract",
+      "title": "Extract and Verify Employment Agreement",
+      "tool": "file_operator",
+      "status": "COMPLETED",
+      "risk_level": "LOW",
+      "approval_granted": false,
+      "evidence_artifacts": [
+        "C:\\Users\\devyani.b\\.gemini\\antigravity\\scratch\\ai-interview-marketplace\\workspace_sandbox\\documents\\offer_letter_alex_morgan.md"
+      ],
+      "result_summary": "# Acme Corp - Executive Offer Agreement\n**Candidate Name:** Alex Morgan\n**Role:** Senior Frontend Engineer\n**Department:** Engineering\n**Email:** alex.m@acme.corp\n**Starting Base Salary:** $165,000 USD\n**Target Start Date:** 2026-10-15\n**Reporting To:** Sarah Lin (VP of Engineering)\n**Signed Status:** SIGNED & VERIFIED (DocuSign Envelope ID: 9481-BCA2-8812)\n**Required Equipment:** MacBook Pro M3 Max 32GB, YubiKey 5C NFC\n",
+      "recovery_notes": null
+    },
+    {
+      "task_id": "task-2-step-2-register-hris",
+      "title": "Create Employee Profile in BambooHR",
+      "tool": "bamboohr_api",
+      "status": "COMPLETED",
+      "risk_level": "LOW",
+      "approval_granted": false,
+      "evidence_artifacts": [],
+      "result_summary": "{'id': 'EMP-1090', 'name': 'Alex Morgan', 'email': 'alex.m@acme.corp', 'role': 'Senior Frontend Engineer', 'department': 'Engineering', 'salary': '$165,000 USD', 'status': 'ACTIVE', 'created_at': 1791609241.5820854}",
+      "recovery_notes": null
+    },
+    {
+      "task_id": "task-3-step-3-provision-iam",
+      "title": "Provision Okta SSO and GitHub Team Access",
+      "tool": "okta_github_iam",
+      "status": "COMPLETED",
+      "risk_level": "LOW",
+      "approval_granted": false,
+      "evidence_artifacts": [],
+      "result_summary": "Provisioned IAM roles for alex.m@acme.corp: ['slack.general', 'engineering-frontend', 'github-repo-access', 'slack-general']",
+      "recovery_notes": null
+    },
+    {
+      "task_id": "task-4-step-4-generate-checklist",
+      "title": "Generate Compliance Onboarding Checklist",
+      "tool": "file_operator",
+      "status": "COMPLETED",
+      "risk_level": "LOW",
+      "approval_granted": false,
+      "evidence_artifacts": [
+        "C:\\Users\\devyani.b\\.gemini\\antigravity\\scratch\\ai-interview-marketplace\\workspace_sandbox\\evidence\\onboarding_checklist_alex_morgan.md"
+      ],
+      "result_summary": "Successfully written 289 bytes to onboarding_checklist_alex_morgan.md",
+      "recovery_notes": null
+    },
+    {
+      "task_id": "task-5-step-5-send-welcome-email",
+      "title": "Send Welcome Email with Credentials and Schedule",
+      "tool": "email_dispatcher",
+      "status": "COMPLETED",
+      "risk_level": "HIGH",
+      "approval_granted": true,
+      "evidence_artifacts": [],
+      "result_summary": "Email successfully dispatched to alex.m@acme.corp (Message ID: msg-5c63bf2e6b)",
+      "recovery_notes": null
+    }
+  ],
+  "trace_events_count": 19
+}

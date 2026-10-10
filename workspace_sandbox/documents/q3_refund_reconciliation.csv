@@ -1,0 +1,13 @@
+date,ticket_id,charge_id,customer_email,amount_usd,status,approved_by
+2026-10-01,TICK-101,ch_3N8812,user1@alpha.io,25.00,RESOLVED,auto_policy
+2026-10-03,TICK-102,ch_3N9934,ops@beta.co,49.99,RESOLVED,auto_policy
+2026-10-10,TICK-8841,ch_3M99824X,billing-support@cloudscale.tech,75.0,RESOLVED,controller_hitl_approved
+2026-10-10,TICK-8841,ch_3M99824X,billing-support@cloudscale.tech,75.0,RESOLVED,controller_hitl_approved
+2026-10-10,TICK-8841,ch_3M99824X,billing-support@cloudscale.tech,75.0,RESOLVED,controller_hitl_approved
+2026-10-10,TICK-8841,ch_3M99824X,billing-support@cloudscale.tech,75.0,RESOLVED,controller_hitl_approved
+2026-10-10,TICK-8841,ch_3M99824X,billing-support@cloudscale.tech,75.0,RESOLVED,controller_hitl_approved
+2026-10-10,TICK-8841,ch_3M99824X,billing-support@cloudscale.tech,75.0,RESOLVED,controller_hitl_approved
+2026-10-10,TICK-8841,ch_3M99824X,billing-support@cloudscale.tech,75.0,RESOLVED,controller_hitl_approved
+2026-10-10,TICK-8841,ch_3M99824X,billing-support@cloudscale.tech,75.0,RESOLVED,controller_hitl_approved
+2026-10-10,TICK-8841,ch_3M99824X,billing-support@cloudscale.tech,75.0,RESOLVED,controller_hitl_approved
+2026-10-10,TICK-8841,ch_3M99824X,billing-support@cloudscale.tech,75.0,RESOLVED,controller_hitl_approved

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CentrAlign | Autonomous Company Operator</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="min-h-screen text-slate-100 flex flex-col">
+
+  <!-- Header -->
+  <header class="border-b border-slate-800 bg-slate-950/80 backdrop-blur sticky top-0 z-50 px-6 py-3.5 flex items-center justify-between">
+    <div class="flex items-center space-x-3">
+      <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-cyan-500 to-indigo-600 flex items-center justify-center font-bold text-lg text-white shadow-lg shadow-cyan-500/20">
+        ?
+      </div>
+      <div>
+        <h1 class="text-lg font-bold tracking-tight bg-gradient-to-r from-white via-slate-200 to-cyan-400 bg-clip-text text-transparent">
+          CentrAlign Operator
+        </h1>
+        <p class="text-xs text-slate-400">Autonomous Company Operator &middot; Founding Engineer Runtime</p>
+      </div>
+    </div>
+
+    <!-- Status & Controls -->
+    <div class="flex items-center space-x-4">
+      <button onclick="openMemoryModal()" class="px-3 py-1.5 rounded-lg border border-slate-700 bg-slate-900/60 hover:bg-slate-800 text-xs font-medium text-slate-300 flex items-center space-x-1.5 transition">
+        <i data-lucide="database" class="w-3.5 h-3.5 text-cyan-400"></i>
+        <span>Org Memory &amp; SOPs</span>
+      </button>
+
+      <div class="h-4 w-px bg-slate-800"></div>
+
+      <div id="system-status-badge" class="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold flex items-center space-x-1.5">
+        <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+        <span>SYSTEM READY</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="flex-1 max-w-7xl w-full mx-auto p-6 space-y-6">
+
+    <!-- Mission Control Bar -->
+    <section class="glass-panel p-5 space-y-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-2">
+          <i data-lucide="sparkles" class="w-5 h-5 text-cyan-400"></i>
+          <h2 class="text-sm font-semibold uppercase tracking-wider text-slate-300">Goal Dispatcher</h2>
+        </div>
+        <div class="text-xs text-slate-400">Type high-level business outcome or select a pre-built enterprise scenario</div>
+      </div>
+
+      <!-- Input Bar -->
+      <div class="flex gap-3">
+        <div class="relative flex-1">
+          <input id="goal-input" type="text" 
+            placeholder="e.g. Onboard Alex Morgan as Senior Frontend Engineer starting next Monday, provision GitHub, and send welcome packet..." 
+            class="w-full bg-slate-900/90 border border-slate-700 rounded-xl px-4 py-3 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 font-mono transition"
+            onkeydown="if(event.key==='Enter') dispatchGoal()"
+          />
+        </div>
+        <button id="dispatch-btn" onclick="dispatchGoal()" class="px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-white font-semibold text-sm flex items-center space-x-2 shadow-lg shadow-cyan-500/25 transition transform active:scale-95">
+          <i data-lucide="play" class="w-4 h-4 fill-white"></i>
+          <span>Execute Goal</span>
+        </button>
+      </div>
+
+      <!-- Demo Scenarios Buttons -->
+      <div class="pt-2 flex items-center space-x-2 overflow-x-auto text-xs">
+        <span class="text-slate-500 font-medium">Enterprise Scenarios:</span>
+        
+        <button onclick="loadScenario('onboarding')" class="px-3 py-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-slate-300 flex items-center space-x-1.5 transition">
+          <span>??</span>
+          <span>HR: Alex Onboarding &amp; Identity</span>
+        </button>
+
+        <button onclick="loadScenario('refund')" class="px-3 py-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-slate-300 flex items-center space-x-1.5 transition">
+          <span>??</span>
+          <span>Finance: Zendesk #8841 Refund ($75)</span>
+        </button>
+
+        <button onclick="loadScenario('offboarding')" class="px-3 py-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-slate-300 flex items-center space-x-1.5 transition">
+          <span>???</span>
+          <span>Security: SOC2 Access Revocation</span>
+        </button>
+
+        <button onclick="loadScenario('recovery')" class="px-3 py-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-slate-300 flex items-center space-x-1.5 transition">
+          <span>??</span>
+          <span>Self-Healing: Browser UI Recovery</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Execution Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+      <!-- Left 7 Cols: Task DAG Graph & Status -->
+      <div class="lg:col-span-7 space-y-4">
+        <div class="glass-panel p-5 min-h-[520px] flex flex-col">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
+            <div class="flex items-center space-x-2">
+              <i data-lucide="git-branch" class="w-4 h-4 text-indigo-400"></i>
+              <h3 class="text-sm font-semibold uppercase tracking-wider text-slate-200">Execution Plan &amp; Invariant DAG</h3>
+            </div>
+            <div id="sop-tag" class="hidden text-xs px-2.5 py-1 rounded bg-indigo-500/10 border border-indigo-500/30 text-indigo-400 font-mono">
+              SOP-HR-001
+            </div>
+          </div>
+
+          <!-- Disambiguated Intent Summary -->
+          <div id="intent-summary-box" class="hidden mb-4 p-3.5 rounded-xl bg-slate-900/70 border border-cyan-500/30 text-xs space-y-1.5">
+            <div class="flex items-center space-x-2 text-cyan-400 font-semibold">
+              <i data-lucide="check-circle" class="w-3.5 h-3.5"></i>
+              <span>Grounded Organizational Intent</span>
+            </div>
+            <p id="disambiguated-intent-text" class="text-slate-300 font-sans leading-relaxed"></p>
+          </div>
+
+          <!-- Task Nodes List Container -->
+          <div id="dag-container" class="space-y-3 flex-1">
+            <div class="h-64 flex flex-col items-center justify-center text-center text-slate-500">
+              <i data-lucide="cpu" class="w-10 h-10 mb-2 opacity-40"></i>
+              <p class="text-sm">No active execution. Enter a goal or choose a scenario above.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right 5 Cols: Live ReAct Observation Stream & Audit Proofs -->
+      <div class="lg:col-span-5 space-y-4">
+        <div class="glass-panel p-5 h-[520px] flex flex-col">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-3">
+            <div class="flex items-center space-x-2">
+              <i data-lucide="terminal" class="w-4 h-4 text-cyan-400"></i>
+              <h3 class="text-sm font-semibold uppercase tracking-wider text-slate-200">Live Observation &amp; ReAct Stream</h3>
+            </div>
+            <div class="text-xs text-slate-500 font-mono" id="log-count">0 events</div>
+          </div>
+
+          <!-- Log Console -->
+          <div id="log-console" class="flex-1 overflow-y-auto custom-scrollbar font-mono text-xs space-y-2 pr-2">
+            <div class="text-slate-600 italic">Awaiting runtime telemetry stream...</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Completed Evidence & Audit Bundle Bar -->
+    <div id="evidence-section" class="hidden glass-panel p-5 border-emerald-500/30 bg-emerald-950/10 space-y-3">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-2.5">
+          <div class="w-7 h-7 rounded-full bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400">
+            <i data-lucide="shield-check" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <h4 class="text-sm font-semibold text-emerald-300">Goal Successfully Completed &amp; Verified</h4>
+            <p class="text-xs text-slate-400">Cryptographic audit trail and system state invariant proofs compiled.</p>
+          </div>
+        </div>
+        <div class="flex space-x-3">
+          <button onclick="viewEvidenceModal()" class="px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold flex items-center space-x-1.5 transition">
+            <i data-lucide="file-text" class="w-3.5 h-3.5"></i>
+            <span>View Audit Report</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- HITL Approval Modal -->
+  <div id="hitl-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="glass-panel max-w-lg w-full p-6 space-y-5 border-amber-500/40 glow-amber">
+      <div class="flex items-start justify-between">
+        <div class="flex items-center space-x-3">
+          <div class="w-9 h-9 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400">
+            <i data-lucide="alert-triangle" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="text-base font-bold text-amber-300">Human Approval Required</h3>
+            <p class="text-xs text-slate-400">Policy guardrail boundary encountered</p>
+          </div>
+        </div>
+        <span class="px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 text-xs font-bold uppercase" id="hitl-risk-tag">HIGH RISK</span>
+      </div>
+
+      <div class="space-y-3 text-xs bg-slate-900/80 p-4 rounded-xl border border-slate-800">
+        <div>
+          <span class="text-slate-500 block font-semibold">TASK:</span>
+          <span id="hitl-task-title" class="text-slate-200 font-medium"></span>
+        </div>
+        <div>
+          <span class="text-slate-500 block font-semibold">POLICY / REASON:</span>
+          <span id="hitl-reason" class="text-amber-300/90 font-mono"></span>
+        </div>
+        <div>
+          <span class="text-slate-500 block font-semibold">BLAST RADIUS:</span>
+          <span id="hitl-blast" class="text-rose-400 font-mono"></span>
+        </div>
+        <div>
+          <span class="text-slate-500 block font-semibold">PROPOSED TOOL &amp; PARAMS:</span>
+          <pre id="hitl-params" class="text-slate-300 bg-slate-950 p-2 rounded mt-1 overflow-x-auto font-mono text-[11px]"></pre>
+        </div>
+      </div>
+
+      <!-- Human Feedback Input -->
+      <div>
+        <label class="block text-xs font-medium text-slate-400 mb-1">Feedback / Signoff Note (Optional):</label>
+        <input id="hitl-feedback-input" type="text" placeholder="e.g. Approved. Verified with department lead." class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-amber-500 font-sans" />
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex justify-end space-x-3 pt-2">
+        <button onclick="submitApproval('REJECTED')" class="px-4 py-2 rounded-lg bg-rose-600/20 hover:bg-rose-600/30 border border-rose-500/40 text-rose-300 text-xs font-semibold transition">
+          Reject Action
+        </button>
+        <button onclick="submitApproval('APPROVED')" class="px-5 py-2 rounded-lg bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400 text-white text-xs font-bold shadow-lg shadow-emerald-500/20 transition">
+          ? Approve &amp; Proceed
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Org Memory Modal -->
+  <div id="memory-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="glass-panel max-w-2xl w-full p-6 space-y-4 max-h-[85vh] flex flex-col">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div class="flex items-center space-x-2">
+          <i data-lucide="database" class="w-5 h-5 text-cyan-400"></i>
+          <h3 class="text-base font-bold text-slate-100">Organizational Context &amp; SOP Knowledge Graph</h3>
+        </div>
+        <button onclick="closeMemoryModal()" class="text-slate-400 hover:text-white">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div id="memory-content" class="flex-1 overflow-y-auto custom-scrollbar space-y-4 text-xs">
+        <div class="text-slate-500">Loading company knowledge graph...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Audit Report Modal -->
+  <div id="evidence-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="glass-panel max-w-3xl w-full p-6 space-y-4 max-h-[85vh] flex flex-col border-emerald-500/30">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div class="flex items-center space-x-2">
+          <i data-lucide="file-check" class="w-5 h-5 text-emerald-400"></i>
+          <h3 class="text-base font-bold text-slate-100">Cryptographic Audit &amp; Invariant Proof Report</h3>
+        </div>
+        <button onclick="closeEvidenceModal()" class="text-slate-400 hover:text-white">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div id="evidence-content" class="flex-1 overflow-y-auto custom-scrollbar font-mono text-xs bg-slate-950 p-4 rounded-xl border border-slate-800 whitespace-pre-wrap text-slate-300">
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+{
+  "session_id": "sess-6e8a624f",
+  "goal": "Onboard candidate Alex",
+  "disambiguated_intent": null,
+  "matched_sop": null,
+  "execution_status": "COMPLETED",
+  "total_tasks": 1,
+  "completed_tasks_count": 1,
+  "failed_tasks_count": 0,
+  "created_at": 1791609485.0408125,
+  "completed_at": 1791609485.0408125,
+  "tasks_evidence": [
+    {
+      "task_id": "task-8da0abbc",
+      "title": "Task 1",
+      "tool": "file_operator",
+      "status": "COMPLETED",
+      "risk_level": "LOW",
+      "approval_granted": false,
+      "evidence_artifacts": [],
+      "result_summary": "None",
+      "recovery_notes": null
+    }
+  ],
+  "trace_events_count": 0
+}

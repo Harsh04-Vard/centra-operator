@@ -1,0 +1,50 @@
+{
+  "session_id": "sess-e767bcd6",
+  "goal": "Execute SOC2 access revocation for departing employee Alex Morgan EMP-1092",
+  "disambiguated_intent": "Conduct automated SOC2 security access revocation for departing employee: scan active permissions across Okta/GitHub, revoke all session credentials under HITL signoff, and compile cryptographic proof certificate.",
+  "matched_sop": "SOP-SEC-012",
+  "execution_status": "COMPLETED",
+  "total_tasks": 3,
+  "completed_tasks_count": 3,
+  "failed_tasks_count": 0,
+  "created_at": 1791609631.099463,
+  "completed_at": 1791609631.1076095,
+  "tasks_evidence": [
+    {
+      "task_id": "task-1-step-1-audit-permissions",
+      "title": "Audit Active System Permissions and Session Tokens",
+      "tool": "okta_github_iam",
+      "status": "COMPLETED",
+      "risk_level": "LOW",
+      "approval_granted": false,
+      "evidence_artifacts": [],
+      "result_summary": "{'email': 'alex.m@acme.corp', 'active_permissions': ['slack-general', 'github-repo-access', 'engineering-frontend', 'slack.general']}",
+      "recovery_notes": null
+    },
+    {
+      "task_id": "task-2-step-2-revoke-access",
+      "title": "Revoke All SSO and Repository Access",
+      "tool": "okta_github_iam",
+      "status": "COMPLETED",
+      "risk_level": "HIGH",
+      "approval_granted": true,
+      "evidence_artifacts": [],
+      "result_summary": "Revoked all Okta SSO and GitHub organization memberships for alex.m@acme.corp",
+      "recovery_notes": null
+    },
+    {
+      "task_id": "task-3-step-3-export-audit-cert",
+      "title": "Generate SOC2 Cryptographic Offboarding Proof",
+      "tool": "file_operator",
+      "status": "COMPLETED",
+      "risk_level": "LOW",
+      "approval_granted": false,
+      "evidence_artifacts": [
+        "C:\\Users\\devyani.b\\.gemini\\antigravity\\scratch\\ai-interview-marketplace\\workspace_sandbox\\evidence\\soc2_revocation_certificate.md"
+      ],
+      "result_summary": "Successfully written 250 bytes to soc2_revocation_certificate.md",
+      "recovery_notes": null
+    }
+  ],
+  "trace_events_count": 13
+}
